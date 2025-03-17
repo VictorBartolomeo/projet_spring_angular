@@ -1,0 +1,10 @@
+<h2>Products</h2>
+<h3>{{products.length}}</h3>
+<ul>
+@for (product of products; track $index) {
+  <li>Model : {{product.name}}| Price : {{product.price}}</li>
+} @empty {
+  <p>There's no products</p>
+}
+
+</ul>
