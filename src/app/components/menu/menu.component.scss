@@ -1,0 +1,23 @@
+.navbar{
+  width: auto;
+  padding: 5px 15px 5px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .menu{
+    justify-content: center;
+  }
+  .slider{
+    justify-content: flex-start;
+    align-items: center;
+    text-overflow: fade;
+  }
+}
+
+.mat-button{
+  &:active{
+    background-color: red;
+  }
+}
+
