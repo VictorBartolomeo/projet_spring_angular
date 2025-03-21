@@ -1,0 +1,40 @@
+.container-card {
+  width: 1720px;
+  display: flex;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 30px ;
+  justify-content: center;
+
+  .card-self {
+    filter: grayscale(1);
+    background-color: rgba(0, 128, 0, 0.15);
+    width: 400px;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 12px;
+    &:hover{
+      filter: grayscale(0);
+    }
+
+    img {
+      border-radius: 12px;
+    }
+
+    h3 {
+      text-align: center;
+    }
+
+  }
+
+  .price {
+    font-weight: bolder;
+  }
+
+  .price_card {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+
