@@ -1,10 +1,26 @@
 <h2>Products</h2>
-<h3>{{products.length}}</h3>
-<ul>
-@for (product of products; track $index) {
-  <li>Model : {{product.name}}| Price : {{product.price}}</li>
-} @empty {
-  <p>There's no products</p>
-}
+<p>{{ products.length }} found in store</p>
+<div class="container-card">
+  @for (product of products; track $index) {
 
-</ul>
+    <div class="card-self">
+      <img src="https://picsum.photos/id/{{product.id+30}}/400/300">
+      <h3>{{ product.name }}</h3>
+      <mat-divider></mat-divider>
+      <p>Description : {{ product.description }}</p>
+
+
+      <div class="price_card">
+        <p class="price">Price : {{ product.price }} €</p>
+        <button mat-raised-button (click)="onClick(product)">Buy now!</button>
+      </div>
+
+      @if (product.label) {
+        <span>{{ product.label }}</span>
+      }
+
+    </div>
+  } @empty {
+    <p>There's no products</p>
+  }
+</div>
