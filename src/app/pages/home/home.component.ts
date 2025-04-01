@@ -1,17 +1,24 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MatButtonModule} from '@angular/material/button';
-import {MatCardContent} from '@angular/material/card';
 import {MatDivider} from '@angular/material/divider';
 import {MatMenuModule} from '@angular/material/menu';
+import {RouterLink} from '@angular/router';
+import {MatChip, MatChipSet} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import {NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-home',
   imports: [
     MatButtonModule,
-    MatCardContent,
     MatDivider,
-    MatMenuModule
+    MatMenuModule,
+    RouterLink,
+    MatChipSet,
+    MatChip,
+    MatIconModule,
+    NgStyle
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -19,14 +26,16 @@ import {MatMenuModule} from '@angular/material/menu';
 export class HomeComponent implements OnInit {
 
   http = inject(HttpClient);
-  products: any = [];
-  ngOnInit(){
-    this.http.get("http://localhost:8080/products")
-      .subscribe(products => {this.products = products;})
+  products: Product[]= [];
+
+  ngOnInit() {
+    this.http.get<Product[]>("http://localhost:8080/products")
+      .subscribe(products => {
+        this.products = products;
+      })
   }
 
-
-  onClick(products: any){
+  onClick(products: any) {
     alert("Vous avez payé " + products.price + "€ pour un " + products.name)
   }
 }

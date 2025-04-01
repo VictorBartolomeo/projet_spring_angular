@@ -3,24 +3,52 @@
 <div class="container-card">
   @for (product of products; track $index) {
 
-    <div class="card-self">
+    <div class="card-self" [class.damaged]="product.state.id == 5">
       <img src="https://picsum.photos/id/{{product.id+30}}/400/300">
       <h3>{{ product.name }}</h3>
-      <mat-divider></mat-divider>
-      <p>Description : {{ product.description }}</p>
 
+      <mat-chip-set aria-label="Labels" class="labels">
+        @for (label of product.labels; track $index) {
+          <mat-chip [ngStyle]="{backgroundColor: label.color}">
+            {{ label.name }}
+          </mat-chip>
+        }
+      </mat-chip-set>
+
+      <mat-divider></mat-divider>
+
+      <p class="description">Description : {{ product.description }}</p>
 
       <div class="price_card">
-        <p class="price">Price : {{ product.price }} €</p>
-        <button mat-raised-button (click)="onClick(product)">Buy now!</button>
+        <p class="price">{{ product.price }} €</p>
+        <button mat-raised-button (click)="onClick(product)">
+          Buy now!
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="admin-buttons">
+        <button mat-fab extended [routerLink]="['/edit-product',product.id]">
+          <mat-icon>edit</mat-icon>
+          Edit
+        </button>
+        <button mat-fab extended>
+          <mat-icon>delete</mat-icon>
+          Delete
+        </button>
+        <button mat-fab extended>
+          <mat-icon>share</mat-icon>
+          Share
+        </button>
       </div>
 
-      @if (product.label) {
-        <span>{{ product.label }}</span>
-      }
 
     </div>
   } @empty {
     <p>There's no products</p>
   }
 </div>
+<button mat-fab extended class="add-product" routerLink='/add-product'>
+  <mat-icon>add</mat-icon>
+  add
+</button>

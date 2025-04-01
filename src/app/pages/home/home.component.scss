@@ -16,6 +16,9 @@
     &:hover{
       filter: grayscale(0);
     }
+    &.damaged{
+      background-color: rgba(255, 0, 0, 0.5);
+    }
 
     img {
       border-radius: 12px;
@@ -28,6 +31,7 @@
   }
 
   .price {
+    font-size: 3rem;
     font-weight: bolder;
   }
 
@@ -35,6 +39,26 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+  }
+  .labels{
+    mat-chip {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .admin-buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  .description {
+    height: 50px;
+  }
+
+  .add-product{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
   }
 }
 
