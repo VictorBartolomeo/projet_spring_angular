@@ -1,15 +1,69 @@
-<mat-form-field>
-  <mat-label>Input</mat-label>
-  <input matInput>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Select</mat-label>
-  <mat-select>
-    <mat-option value="one">First option</mat-option>
-    <mat-option value="two">Second option</mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Textarea</mat-label>
-  <textarea matInput></textarea>
-</mat-form-field>
+<div class="form-container">
+
+  <form [formGroup]="form" (ngSubmit)=onSubmitEdit()>
+
+    <h1>{{editedProduct ? `Edit product : ${editedProduct.name}` : `Add a new product`}}</h1>
+
+    <mat-form-field class="form-line">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" placeholder="Write the name of the product.">
+      @if (form.get("name")?.hasError("required")) {
+        <mat-error>Le nom est requis</mat-error>
+      } @else if (form.get("name")?.hasError("minlength") || form.get("name")?.hasError("maxlength")) {
+        <mat-error>Le nom doit être compris entre 3 et 25 caractères</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="form-line">
+      <mat-label>Code</mat-label>
+      <input matInput formControlName="code" placeholder="CODE01">
+      @if (form.get("code")?.hasError("required")) {
+        <mat-error>Le code est requis</mat-error>
+      } @else if (form.get("code")?.hasError("minlength") || form.get("code")?.hasError("maxlength")) {
+        <mat-error>Le code doit être d'exactement 10 caractères</mat-error>
+      }
+      <mat-error>Le code est requis</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-line">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"
+                placeholder="Write a description for the product. It's a revolution."></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="form-line">
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="price" type="number" placeholder="0.00€">
+      @if (form.get("price")?.hasError("required")) {
+        <mat-error>Le prix est requis</mat-error>
+      } @else if (form.get("price")?.hasError("min")) {
+        <mat-error>Le prix doit être au minimum de 1 centime.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="form-line">
+      <mat-label>State of the product</mat-label>
+      <mat-select formControlName="state" [compareWith]="compareId">
+        @for (state of states; track $index) {
+          <mat-option [value]="state">{{ state.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-line">
+      <mat-label>Labels</mat-label>
+      <mat-select formControlName="labels" multiple placeholder="Select labels for this product"
+                  [compareWith]="compareId">
+        @for (label of labels; track $index) {
+          <mat-option [value]="label">{{ label.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button class="form-line">
+      <i class="material-icons">{{editedProduct ? "edit" : "add"}}</i>{{ editedProduct ? "Edit product!" : "Add product!" }}
+    </button>
+  </form>
+
+</div>
+
