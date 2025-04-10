@@ -7,6 +7,7 @@ import {MatButton} from '@angular/material/button';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -20,12 +21,12 @@ export class EditProductComponent {
 
   http = inject(HttpClient);
   activatedRoute = inject(ActivatedRoute);
+  notification = inject(NotificationService);
 
   labels: Label[] = [];
   states: State[] = [];
   products: Product[] = [];
   editedProduct: Product | null = null;
-  alert = inject(MatSnackBar)
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(parameter => {
@@ -75,7 +76,7 @@ export class EditProductComponent {
       console.log(this.form.value)
       this.http.post("http://localhost:8080/product", this.form.value)
         .subscribe((result) => {
-          this.alert.open("Product added!", "", {duration: 5000})
+          this.notification.showTop("Product added!", "valid")
         });
     }
   }
@@ -86,7 +87,7 @@ export class EditProductComponent {
         console.log(this.form.value)
         this.http.put(`http://localhost:8080/product/${this.editedProduct.id}`, this.form.value)
           .subscribe((result) => {
-            this.alert.open("Product edited!", "", {duration: 5000})
+            this.notification.showTop("Product edited!", "valid")
           });
       }
     }
