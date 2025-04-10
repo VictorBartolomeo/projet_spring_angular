@@ -29,10 +29,15 @@ export class HomeComponent implements OnInit {
   products: Product[]= [];
 
   ngOnInit() {
-    this.http.get<Product[]>("http://localhost:8080/products")
+
+    const jwt=localStorage.getItem('jwt');
+
+    if(jwt){
+
+    this.http.get<Product[]>("http://localhost:8080/products", {headers: {Authorization: `Bearer ${jwt}`}})
       .subscribe(products => {
-        this.products = products;
-      })
+        this.products = products;})
+    }
   }
 
   onClick(products: any) {
