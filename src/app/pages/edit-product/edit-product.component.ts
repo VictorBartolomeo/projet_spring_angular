@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -6,7 +6,6 @@ import {HttpClient} from '@angular/common/http';
 import {MatButton} from '@angular/material/button';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {NotificationService} from '../../services/notification.service';
 
 @Component({
@@ -17,7 +16,7 @@ import {NotificationService} from '../../services/notification.service';
   styleUrl: './edit-product.component.scss'
 })
 
-export class EditProductComponent {
+export class EditProductComponent implements OnInit {
 
   http = inject(HttpClient);
   activatedRoute = inject(ActivatedRoute);
