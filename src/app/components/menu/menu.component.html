@@ -2,13 +2,17 @@
 
   <div class="menu">
     <button mat-button routerLink="/home" routerLinkActive="active">🍍Home</button>
-    <button mat-button routerLink="/login" routerLinkActive="active">Login</button>
+    @if (!auth.connected) {
+      <button mat-button routerLink="/login" routerLinkActive="active">Login</button>
+    } @else {
+      <button mat-button routerLink="/login" (click)="auth.disconnection()">Sign out</button>
+    }
   </div>
   <div class="slider">
-    <mat-slide-toggle>Activer le mode Stéphane Lion Brownie</mat-slide-toggle>
+    <mat-slide-toggle>Activer le mode Stéphane Barbecue</mat-slide-toggle>
   </div>
   <div class="slider">
-    <mat-slide-toggle>Tetiana chafouin</mat-slide-toggle>
+    <mat-slide-toggle>Tetiana Vroum vroum</mat-slide-toggle>
   </div>
 </div>
 
