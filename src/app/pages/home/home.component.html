@@ -4,7 +4,7 @@
   @for (product of products; track $index) {
 
     <div class="card-self" [class.damaged]="product.state.id == 5">
-      <img src="https://picsum.photos/id/{{product.id+30}}/400/300">
+      <img src="https://picsum.photos/id/{{product.id+432}}/400/300">
       <h3>{{ product.name }}</h3>
 
       <mat-chip-set aria-label="Labels" class="labels">
@@ -25,6 +25,8 @@
           Buy now!
         </button>
       </div>
+
+      @if (auth.role === 'ROLE_SELLER' || auth.role === 'ROLE_CHIEF') {
       <mat-divider></mat-divider>
 
       <div class="admin-buttons">
@@ -41,6 +43,7 @@
           Share
         </button>
       </div>
+      }
 
 
     </div>
