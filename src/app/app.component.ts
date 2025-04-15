@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-// import {MatButton} from '@angular/material/menu';
 import {MenuComponent} from './components/menu/menu.component';
 
 @Component({
@@ -11,5 +10,5 @@ import {MenuComponent} from './components/menu/menu.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = '🍍Pineapple Store';
+  title = '🍍Pineapple Store'
 }
