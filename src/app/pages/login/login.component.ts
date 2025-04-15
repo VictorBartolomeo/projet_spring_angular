@@ -4,6 +4,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {HttpClient} from '@angular/common/http';
 import {NotificationService} from '../../services/notification.service';
+import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -22,8 +24,9 @@ export class LoginComponent {
 
   formBuilder = inject(FormBuilder);
   http = inject(HttpClient);
-
   notification = inject(NotificationService);
+  router = inject(Router)
+  auth = inject(AuthService);
 
 
   form = this.formBuilder.group({
@@ -31,10 +34,13 @@ export class LoginComponent {
     password: ['root', [Validators.required]],
   })
 
-  onConnexion() {
+  onConnection() {
     if (this.form.valid) {
       this.http.post("http://localhost:8080/login", this.form.value, {responseType: "text"}).subscribe({
-        next: jwt => localStorage.setItem('jwt', jwt),
+        next: jwt => {
+          this.router.navigateByUrl('/home')
+          this.auth.decodeJwt(jwt)
+        },
         error: error => {
           if (error.status === 401) {
             this.notification.showTop("NO NO JOSÉ", "error")
@@ -43,4 +49,5 @@ export class LoginComponent {
       })
     }
   }
+
 }
