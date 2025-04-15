@@ -7,6 +7,7 @@ import {RouterLink} from '@angular/router';
 import {MatChip, MatChipSet} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {NgStyle} from '@angular/common';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -26,19 +27,17 @@ import {NgStyle} from '@angular/common';
 export class HomeComponent implements OnInit {
 
   http = inject(HttpClient);
-  products: Product[]= [];
+  products: Product[] = [];
+  auth=inject(AuthService)
 
   ngOnInit() {
 
-    const jwt=localStorage.getItem('jwt');
 
-    if(jwt){
-
-    this.http.get<Product[]>("http://localhost:8080/products", {headers: {Authorization: `Bearer ${jwt}`}})
-      .subscribe(products => {
-        this.products = products;})
-    }
+    this.http.get<Product[]>("http://localhost:8080/products")
+      .subscribe(products =>
+        this.products = products);
   }
+
 
   onClick(products: any) {
     alert("Vous avez payé " + products.price + "€ pour un " + products.name)
