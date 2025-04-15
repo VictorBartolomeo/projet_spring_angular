@@ -1,6 +1,6 @@
-<form [formGroup]="form" (ngSubmit)="onConnexion()">
+<form [formGroup]="form" (ngSubmit)="onConnection()">
 
-  <mat-form-field>
+  <mat-form-field class="form-line">
     <mat-label>Email</mat-label>
     <input formControlName="email" matInput placeholder="Ex. a@a.com">
 
@@ -12,14 +12,14 @@
 
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field class="form-line">
     <mat-label>Mot de passe</mat-label>
     <input formControlName="password" type="password" matInput>
     <mat-error>Le mot de passe est requis</mat-error>
   </mat-form-field>
 
 
-  <button type="submit" mat-raised-button>
+  <button class="form-line" type="submit" mat-raised-button>
     Se connecter
   </button>
 
