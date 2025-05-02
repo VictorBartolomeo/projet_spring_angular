@@ -5,8 +5,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {HttpClient} from '@angular/common/http';
 import {MatButton} from '@angular/material/button';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
+import {ProductService} from '../../services/repository/product.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -21,6 +22,8 @@ export class EditProductComponent implements OnInit {
   http = inject(HttpClient);
   activatedRoute = inject(ActivatedRoute);
   notification = inject(NotificationService);
+  router = inject(Router);
+  productService = inject(ProductService);
 
   labels: Label[] = [];
   states: State[] = [];
@@ -72,22 +75,30 @@ export class EditProductComponent implements OnInit {
 
   onAddProduct() {
     if (this.form.valid) {
-      console.log(this.form.value)
-      this.http.post("http://localhost:8080/product", this.form.value)
-        .subscribe((result) => {
-          this.notification.showTop("Product added!", "valid")
-        });
+      this.productService
+        .addProduct(this.form.value)
+        .subscribe(
+          {
+            next: () => this.notification.showTop("Product added!", "valid"),
+            error: () => this.notification.showTop("Internal Error!", "error"),
+
+          })
+      this.router.navigateByUrl("/home")
     }
   }
 
   onEditProduct() {
     if (this.form.valid) {
       if (this.editedProduct) {
-        console.log(this.form.value)
-        this.http.put(`http://localhost:8080/product/${this.editedProduct.id}`, this.form.value)
-          .subscribe((result) => {
-            this.notification.showTop("Product edited!", "valid")
-          });
+        this.productService
+          .editProduct(this.editedProduct.id, this.form.value)
+          .subscribe(
+            {
+              next: () => this.notification.showTop("Product added!", "valid"),
+              error: () => this.notification.showTop("Internal Error!", "error"),
+
+            })
+        this.router.navigateByUrl("/home")
       }
     }
   }
