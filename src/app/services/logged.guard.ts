@@ -1,14 +1,15 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from '@angular/core';
+import {AuthService} from './auth.service';
 
 export const loggedGuard: CanActivateFn = (route, state) => {
 
-  const jwt = localStorage.getItem('jwt');
+  const auth = inject(AuthService)
 
-  if (jwt === null) {
-    const router: Router = inject(Router);
-    return router.parseUrl('/login')
+  if (auth.connected) {
+    return true;
   }
 
-  return true;
+  const router: Router = inject(Router);
+  return router.parseUrl('/login')
 };
