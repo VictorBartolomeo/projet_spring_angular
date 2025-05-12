@@ -3,7 +3,7 @@
   display: flex;
   margin: 0 auto;
   flex-wrap: wrap;
-  gap: 30px ;
+  gap: 30px;
   justify-content: center;
 
   .card-self {
@@ -13,10 +13,12 @@
     padding: 15px;
     border: 1px solid black;
     border-radius: 12px;
-    &:hover{
+
+    &:hover {
       filter: grayscale(0);
     }
-    &.damaged{
+
+    &.damaged {
       background-color: rgba(255, 0, 0, 0.5);
     }
 
@@ -40,25 +42,30 @@
     align-items: center;
     justify-content: space-around;
   }
-  .labels{
+
+  .labels {
     mat-chip {
       display: flex;
       justify-content: space-between;
     }
   }
-  .admin-buttons{
+
+  .admin-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
   }
+
   .description {
     height: 50px;
   }
-
-  .add-product{
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-  }
 }
+
+
+.add-product {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
 
