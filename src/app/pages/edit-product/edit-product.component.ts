@@ -30,6 +30,7 @@ export class EditProductComponent implements OnInit {
   states: State[] = [];
   products: Product[] = [];
   editedProduct: Product | null = null;
+  picture?: File;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(parameter => {
@@ -108,7 +109,7 @@ export class EditProductComponent implements OnInit {
     return o1.id === o2.id;
   }
 
-  onFileSelected() {
-
+  onFileSelected(file: File) {
+    this.picture = file;
   }
 }
