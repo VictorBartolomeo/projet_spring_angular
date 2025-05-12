@@ -8,10 +8,11 @@ import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angula
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
 import {ProductService} from '../../services/repository/product.service';
+import {UploadComponent} from '../../components/upload/upload.component';
 
 @Component({
   selector: 'app-edit-product',
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButton, ReactiveFormsModule, FormsModule],
+  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButton, ReactiveFormsModule, FormsModule, UploadComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.scss'
@@ -105,5 +106,9 @@ export class EditProductComponent implements OnInit {
 
   compareId(o1: { id: number }, o2: { id: number }): boolean {
     return o1.id === o2.id;
+  }
+
+  onFileSelected() {
+
   }
 }

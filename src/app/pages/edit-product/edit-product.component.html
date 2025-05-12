@@ -60,6 +60,8 @@
       </mat-select>
     </mat-form-field>
 
+    <app-upload (select)="onFileSelected()"/>
+
     <button type="submit" mat-raised-button class="form-line">
       <i class="material-icons">{{editedProduct ? "edit" : "add"}}</i>{{ editedProduct ? "Edit product!" : "Add product!" }}
     </button>
