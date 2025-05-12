@@ -30,7 +30,7 @@ export class EditProductComponent implements OnInit {
   states: State[] = [];
   products: Product[] = [];
   editedProduct: Product | null = null;
-  picture?: File;
+  picture: File | null = null;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(parameter => {
@@ -71,7 +71,16 @@ export class EditProductComponent implements OnInit {
     if (this.editedProduct) {
       this.onEditProduct()
     } else {
-      this.onAddProduct()
+      const formData = new FormData();
+      formData.set("product", new Blob([JSON.stringify(this.form.value)], {type: "application/json"}));
+      console.log(this.picture)
+      if (this.picture) {
+
+        formData.set("picture", this.picture!);
+      }
+
+      this.http.post("http://localhost:8080/product", formData).subscribe(product => console.log("OK"));
+      // this.onAddProduct()
     }
   }
 
@@ -109,7 +118,8 @@ export class EditProductComponent implements OnInit {
     return o1.id === o2.id;
   }
 
-  onFileSelected(file: File) {
+  onFileSelected(file: File |null) {
     this.picture = file;
+    console.log(this.picture)
   }
 }
