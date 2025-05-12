@@ -22,6 +22,5 @@ export class UploadComponent {
     this.file = event.target.files[0];
     this.selectedFile.emit(this.file);
   }
-
 }
 

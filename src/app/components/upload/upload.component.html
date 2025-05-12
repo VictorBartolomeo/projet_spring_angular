@@ -3,12 +3,13 @@
 <div class="button" (click)="fileChooser.click()">
   <div>
     <mat-icon>drive_folder_upload</mat-icon>
+    @if(file) {
+      <span class="file-name">{{ file?.name ?? "No file selected" }}</span>
+    } @else {
+      Choose a file
+    }
   </div>
 </div>
-  @if(file) {
-  <span class="file-name">{{ file?.name ?? "No file selected" }}</span>
-  } @else {
-    Choose a file
-  }
+
 
 
