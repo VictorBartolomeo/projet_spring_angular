@@ -1,4 +1,8 @@
 <h2>Products</h2>
+<button mat-fab extended class="add-product" routerLink='/add-product'>
+  <mat-icon class="button-add-product">add</mat-icon>
+  Add New
+</button>
 <p>{{ products.length }} found in store</p>
 <div class="container-card">
   @for (product of products; track $index) {
@@ -51,7 +55,4 @@
     <p>There's no products</p>
   }
 </div>
-<button mat-fab extended class="add-product" routerLink='/add-product'>
-  <mat-icon>add</mat-icon>
-  add
-</button>
+
