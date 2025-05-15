@@ -9,6 +9,7 @@ import {NgStyle} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
 import {ProductService} from '../../services/repository/product.service';
 import {MatCardImage} from '@angular/material/card';
+import {SecuredImgDirective} from '../../components/secured-img.directive';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ import {MatCardImage} from '@angular/material/card';
     MatChip,
     MatIconModule,
     NgStyle,
-    MatCardImage
+    MatCardImage,
+    SecuredImgDirective
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
