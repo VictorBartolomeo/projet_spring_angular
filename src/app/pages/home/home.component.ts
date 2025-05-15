@@ -8,6 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {NgStyle} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
 import {ProductService} from '../../services/repository/product.service';
+import {MatCardImage} from '@angular/material/card';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ import {ProductService} from '../../services/repository/product.service';
     MatChipSet,
     MatChip,
     MatIconModule,
-    NgStyle
+    NgStyle,
+    MatCardImage
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
