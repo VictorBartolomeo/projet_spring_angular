@@ -2,7 +2,7 @@
 
   <form [formGroup]="form" (ngSubmit)=onSubmitEdit()>
 
-    <h1>{{editedProduct ? `Edit product : ${editedProduct.name}` : `Add a new product`}}</h1>
+    <h1>{{editedProduct ? `Edit product : ${editedProduct?.name}` : `Add a new product`}}</h1>
 
     <mat-form-field class="form-line">
       <mat-label>Name</mat-label>
@@ -62,7 +62,7 @@
 
     <app-upload (selectedFile)="onFileSelected($event)"/>
 
-    <button type="submit" class="form-line">
+    <button mat-button type="submit" class="form-line">
       <i class="material-icons">{{editedProduct ? "edit" : "add"}}</i>{{ editedProduct ? "Edit product!" : "Add product!" }}
     </button>
   </form>
