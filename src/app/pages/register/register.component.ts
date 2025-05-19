@@ -37,7 +37,7 @@ export class RegisterComponent {
 
   onRegister() {
     if (this.form.valid) {
-      this.http.post("http://localhost:8080/register", this.form.value).subscribe({
+      this.http.post(environment.serveurUrl + "/register", this.form.value).subscribe({
         next: jwt => {
           this.router.navigateByUrl('/login')
           this.notification.showTop("Confirmation mail sent to provided e-mail", "warning")

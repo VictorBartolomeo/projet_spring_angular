@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
 import {MatButtonModule} from '@angular/material/button';
 import {delay} from 'rxjs';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-validate-mail',
@@ -31,7 +32,7 @@ export class ValidateMailComponent implements OnInit {
 
   onValidateRegister() {
     if(this.token){
-          this.http.post<{ token: string, CGU: boolean }>('http://localhost:8080/validate-email', {token : this.token, CGU: true})
+          this.http.post<{ token: string, CGU: boolean }>(environment.serveurUrl + '/validate-email', {token : this.token, CGU: true})
             .subscribe({
               next : (result) => {
                 this.notification.showTop("Email validated", "valid")

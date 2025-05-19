@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {NotificationService} from '../../services/notification.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +37,7 @@ export class LoginComponent {
 
   onConnection() {
     if (this.form.valid) {
-      this.http.post("http://localhost:8080/login", this.form.value, {responseType: "text"}).subscribe({
+      this.http.post(environment.serveurUrl + "/login", this.form.value, {responseType: "text"}).subscribe({
         next: jwt => {
           this.router.navigateByUrl('/home')
           this.auth.decodeJwt(jwt)
