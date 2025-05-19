@@ -8,7 +8,7 @@
   @for (product of products; track $index) {
 
     <div class="card-self" [class.damaged]="product.state.id == 5">
-      <img SecuredImg mat-card-image src="http://localhost:8080/pictures/{{product.pictureName}}">
+      <img SecuredImg mat-card-image src="{{ImgEnvironment.serveurUrl}}/pictures/{{product.pictureName}}">
       <h3>{{ product.name }}</h3>
 
       <mat-chip-set aria-label="Labels" class="labels">

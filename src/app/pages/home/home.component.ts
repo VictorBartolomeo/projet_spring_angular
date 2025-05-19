@@ -10,6 +10,7 @@ import {AuthService} from '../../services/auth.service';
 import {ProductService} from '../../services/repository/product.service';
 import {MatCardImage} from '@angular/material/card';
 import {SecuredImgDirective} from '../../components/secured-img.directive';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -33,6 +34,7 @@ export class HomeComponent {
   auth = inject(AuthService)
   productService = inject(ProductService)
   products:Product[]=[];
+  ImgEnvironment= environment;
 
   ngOnInit() {
     this.productService.getAll()
