@@ -2,13 +2,18 @@ import {Component, inject, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
+import {MatButtonModule} from '@angular/material/button';
+import {delay} from 'rxjs';
 
 @Component({
   selector: 'app-validate-mail',
-  imports: [],
+  imports: [
+    MatButtonModule
+  ],
   templateUrl: './validate-mail.component.html',
   styleUrl: './validate-mail.component.scss'
 })
+
 export class ValidateMailComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute);
   http = inject(HttpClient)
@@ -26,12 +31,13 @@ export class ValidateMailComponent implements OnInit {
 
   onValidateRegister() {
     if(this.token){
-          this.http.post<{ token: string, CGU: boolean }>('http://localhost:8080/validate-email/' +this.token, {token : this.token, CGU: true})
+          this.http.post<{ token: string, CGU: boolean }>('http://localhost:8080/validate-email', {token : this.token, CGU: true})
             .subscribe({
               next : (result) => {
                 this.notification.showTop("Email validated", "valid")
                 this.router.navigateByUrl("/login")
-              }}
+              }
+              }
             )
         }
       }
