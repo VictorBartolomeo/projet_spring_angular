@@ -11,6 +11,7 @@ export const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "add-product", component: EditProductComponent, canActivate: [sellerGuard]},
   {path: "edit-product/:id", component: EditProductComponent, canActivate: [sellerGuard]},
+  {path: "validate-mail/:token", component: HomeComponent},
   {path: "", redirectTo: "home", pathMatch: "full"},
   {path: "**", component: NotfoundComponent},
 ];
