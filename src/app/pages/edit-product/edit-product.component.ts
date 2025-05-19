@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
 import {ProductService} from '../../services/repository/product.service';
 import {UploadComponent} from '../../components/upload/upload.component';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-edit-product',
@@ -35,7 +36,7 @@ export class EditProductComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(parameter => {
       if (parameter['id']) {
-        this.http.get<Product>(`http://localhost:8080/product/${parameter['id']}`)
+        this.http.get<Product>(environment.serveurUrl +`/product/${parameter['id']}`)
           .subscribe(product => {
             this.form.patchValue(product)
             this.editedProduct = product;
@@ -43,15 +44,15 @@ export class EditProductComponent implements OnInit {
       }
     });
 
-    this.http.get<Product[]>("http://localhost:8080/products")
+    this.http.get<Product[]>(environment.serveurUrl + "/products")
       .subscribe(products => {
         this.products = products;
       })
-    this.http.get<Label[]>("http://localhost:8080/labels")
+    this.http.get<Label[]>(environment.serveurUrl + "/labels")
       .subscribe(labels => {
         this.labels = labels;
       })
-    this.http.get<State[]>("http://localhost:8080/states")
+    this.http.get<State[]>(environment.serveurUrl + "/states")
       .subscribe(states => {
         this.states = states;
       });
@@ -79,7 +80,7 @@ export class EditProductComponent implements OnInit {
         formData.set("picture", this.picture!);
       }
 
-      this.http.post("http://localhost:8080/product", formData).subscribe(product => console.log("OK"));
+      this.http.post(environment.serveurUrl + "/product", formData).subscribe(product => console.log("OK"));
       // this.onAddProduct()
     }
   }
